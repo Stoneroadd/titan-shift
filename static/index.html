@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Titan Shift · KPI de turno</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar"><div class="brand"><span class="mark">T</span><span>TITAN <b>SHIFT</b></span></div><span class="environment">DEMO · DATOS INGRESADOS POR EL USUARIO</span></header>
+  <main>
+    <div class="page-heading"><div><p class="eyebrow">OPERACIONES / VISTA DE TURNO</p><h1>Control de producción</h1><p>Registra turnos y revisa indicadores calculados desde los valores ingresados.</p></div><span id="record-count" class="count">0 turnos</span></div>
+    <section class="summary" aria-label="Resumen de indicadores">
+      <article class="metric"><span>Producción registrada</span><strong id="total-tonnes">—</strong><small>toneladas · todos los turnos</small></article>
+      <article class="metric"><span>Cumplimiento agregado</span><strong id="compliance">—</strong><small>producción / plan</small></article>
+      <article class="metric"><span>Disponibilidad agregada</span><strong id="availability">—</strong><small>tiempo operativo / programado</small></article>
+    </section>
+    <div class="columns">
+      <section class="panel"><div class="panel-head"><div><p class="eyebrow">ENTRADA DE DATOS</p><h2>Nuevo turno</h2></div></div>
+        <form id="shift-form">
+          <div class="form-grid"><label>Fecha<input name="shift_date" type="date" required></label><label>Turno<select name="name"><option>Día</option><option>Noche</option></select></label></div>
+          <div class="form-grid"><label>Plan (t)<input name="planned_tonnes" type="number" min="0.01" step="0.01" required placeholder="1200"></label><label>Producción (t)<input name="actual_tonnes" type="number" min="0" step="0.01" required placeholder="1080"></label></div>
+          <div class="form-grid"><label>Minutos programados<input name="scheduled_minutes" type="number" min="1" max="1440" step="1" required value="720"></label><label>Minutos de detención<input name="downtime_minutes" type="number" min="0" max="1440" step="1" required value="0"></label></div>
+          <p id="form-message" role="status" aria-live="polite"></p><button class="primary" type="submit">Registrar turno</button>
+        </form>
+      </section>
+      <section class="panel history"><div class="panel-head"><div><p class="eyebrow">HISTORIAL</p><h2>Turnos registrados</h2></div></div><div id="shift-list" aria-live="polite"></div></section>
+    </div>
+    <p class="footnote">Indicadores: cumplimiento = producción ÷ plan × 100; disponibilidad = (minutos programados − detención) ÷ minutos programados × 100. Si no hubo tiempo operativo, la tasa t/h se muestra como no disponible. Esta demo no contiene datos reales de faena.</p>
+  </main>
+</body>
+</html>
